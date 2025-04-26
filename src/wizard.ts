@@ -1,6 +1,7 @@
 import * as ex from 'excalibur';
 import { Level } from './level';
 import { Bolt } from './bolt';
+import { Resources } from './resources';
 
 const defaultVelX = 200;
 const defaultCooldown = 500;
@@ -20,10 +21,14 @@ export class Wizard extends ex.Actor {
   ) {
     super({
       pos: config.pos,
-      width: 16,
-      height: 16,
+      width: 32,
+      height: 32,
       color: ex.Color.Yellow,
     });
+  }
+
+  override onInitialize(): void {
+    this.graphics.add(Resources.WizardImage.toSprite({ destSize: { width: 32, height: 32 } }));
   }
 
   override onPostUpdate(engine: ex.Engine): void {
