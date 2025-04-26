@@ -20,7 +20,7 @@ const compat = new FlatCompat({
 });
 
 const config = defineConfig([
-  globalIgnores(['dist/**/*']),
+  globalIgnores(['dist/**/*', 'docs/**/*']),
   {
     ignores: ['eslint.config.mjs'],
     extends: compat.extends(
