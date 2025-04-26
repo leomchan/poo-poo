@@ -1,7 +1,12 @@
 import * as ex from 'excalibur';
+import { Level } from './level';
+import { Poo } from './poo';
 
 export class Bolt extends ex.Actor {
-  constructor(pos: ex.Vector) {
+  constructor(
+    readonly level: Level,
+    pos: ex.Vector
+  ) {
     super({
       pos,
       width: 16,
@@ -10,6 +15,13 @@ export class Bolt extends ex.Actor {
     });
 
     this.vel = ex.vec(0, -500);
+  }
+
+  override onCollisionStart(_self: ex.Collider, other: ex.Collider): void {
+    if (other.owner instanceof Poo) {
+      other.owner.kill();
+      this.level.incrementScore();
+    }
   }
 
   override onPostUpdate(): void {

@@ -42,7 +42,7 @@ export class Wizard extends ex.Actor {
     const canShoot = Date.now() - this.lastShot > (this.config.cooldown ?? defaultCooldown);
     if (canShoot && engine.input.keyboard.isHeld(ex.Keys.Space)) {
       this.lastShot = Date.now();
-      const bolt = new Bolt(ex.vec(this.pos.x, this.pos.y - this.height));
+      const bolt = new Bolt(this.level, ex.vec(this.pos.x, this.pos.y - this.height));
       this.level.add(bolt);
     }
   }
