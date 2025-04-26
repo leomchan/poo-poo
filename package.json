@@ -1,0 +1,29 @@
+{
+  "name": "poo-poo",
+  "version": "0.1.0-0",
+  "description": "Quick shooter",
+  "main": "dist/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "vite",
+    "build": "tsc && vite build",
+    "servie": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leomchan/poo-poo.git"
+  },
+  "author": "Leo Chan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leomchan/poo-poo/issues"
+  },
+  "homepage": "https://github.com/leomchan/poo-poo#readme",
+  "devDependencies": {
+    "typescript": "5.8.3",
+    "vite": "6.3.3"
+  },
+  "dependencies": {
+    "excalibur": "0.30.3"
+  }
+}
