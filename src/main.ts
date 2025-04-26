@@ -1,5 +1,6 @@
 import * as ex from 'excalibur';
 import { Level } from './level';
+import { Resources } from './resources';
 
 const size: ex.Vector = ex.vec(480, 640);
 
@@ -13,8 +14,10 @@ const game = new ex.Engine({
   scenes: { level: Level },
 });
 
+const loader = new ex.Loader(Object.values(Resources));
+
 game
-  .start()
+  .start(loader)
   .then(() => {
     return game.goToScene('level');
   })
