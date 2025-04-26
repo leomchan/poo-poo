@@ -1,16 +1,23 @@
 import * as ex from 'excalibur';
-import { Dkf } from './dkf';
+import { Level } from './level';
+
+const size: ex.Vector = ex.vec(480, 640);
 
 const game = new ex.Engine({
-  width: 480,
-  height: 640,
+  width: size.x,
+  height: size.y,
   backgroundColor: ex.Color.fromHex('#54C0Ca'),
   pixelArt: true,
   pixelRatio: 2,
   displayMode: ex.DisplayMode.FitScreen,
+  scenes: { level: Level },
 });
 
-const dkf = new Dkf();
-
-game.add(dkf);
-game.start();
+game
+  .start()
+  .then(() => {
+    return game.goToScene('level');
+  })
+  .catch((err) => {
+    console.error(err);
+  });
