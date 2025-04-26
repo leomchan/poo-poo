@@ -34,12 +34,45 @@ export class Level extends ex.Scene {
     }),
   });
 
+  startGameLabel = new ex.Label({
+    text: 'Right/Left to move.\nSpace to fire.\nPress space to start.',
+    x: 240,
+    y: 320,
+    z: 2,
+    font: new ex.Font({
+      size: 24,
+      color: ex.Color.White,
+      textAlign: ex.TextAlign.Center,
+    }),
+  });
+
+  showStartInstructions() {
+    this.startGameLabel.graphics.isVisible = true;
+    this.engine.input.keyboard.once('press', (event: ex.KeyEvent) => {
+      if (event.key == ex.Keys.Space) {
+        this.reset();
+        this.pooFactory.start();
+        this.startGameLabel.graphics.isVisible = false;
+      }
+    });
+  }
   override onInitialize(engine: ex.Engine): void {
+    this.add(this.startGameLabel);
     this.add(this.scoreLabel);
     this.add(this.healthLabel);
     this.wiz = new Wizard(this, { pos: ex.vec(engine.halfDrawWidth, engine.drawHeight - 32), moveVel: 250 });
     this.add(this.wiz);
-    this.pooFactory.start();
+    this.wiz.graphics.isVisible = false;
+    this.showStartInstructions();
+  }
+
+  reset() {
+    this.score = 0;
+    this.scoreLabel.text = `Poos: ${this.score}`;
+    this.health = 3;
+    this.healthLabel.text = `HP: ${this.health}`;
+    this.wiz.pos = ex.vec(this.engine.halfDrawWidth, this.engine.drawHeight - 32);
+    this.wiz.graphics.isVisible = true;
   }
 
   incrementScore() {
@@ -53,7 +86,8 @@ export class Level extends ex.Scene {
       this.pooFactory.stop();
       this.actors.filter((actor) => actor instanceof Poo).forEach((poo) => poo.kill());
       this.actors.filter((actor) => actor instanceof Bolt).forEach((bolt) => bolt.kill());
-      this.wiz.kill();
+      this.wiz.graphics.isVisible = false;
+      this.showStartInstructions();
     }
   }
 }
