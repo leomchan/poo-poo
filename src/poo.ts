@@ -16,4 +16,10 @@ export class Poo extends ex.Actor {
 
     this.vel = ex.vec(0, config.fallVel ?? 100);
   }
+
+  override onPostUpdate(engine: ex.Engine): void {
+    if (this.pos.y > engine.drawHeight + 16) {
+      this.kill();
+    }
+  }
 }
