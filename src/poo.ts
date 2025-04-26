@@ -1,4 +1,5 @@
 import * as ex from 'excalibur';
+import { Level } from './level';
 
 interface PooConfig {
   pos: ex.Vector;
@@ -6,7 +7,10 @@ interface PooConfig {
 }
 
 export class Poo extends ex.Actor {
-  constructor(config: PooConfig) {
+  constructor(
+    readonly level: Level,
+    config: PooConfig
+  ) {
     super({
       pos: config.pos,
       width: 16,
@@ -18,8 +22,9 @@ export class Poo extends ex.Actor {
   }
 
   override onPostUpdate(engine: ex.Engine): void {
-    if (this.pos.y > engine.drawHeight + 16) {
+    if (this.pos.y > engine.drawHeight + 8) {
       this.kill();
+      this.level.decrementHealth();
     }
   }
 }

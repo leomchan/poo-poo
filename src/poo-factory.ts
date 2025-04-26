@@ -19,7 +19,7 @@ export class PooFactory {
 
   spawnPoo() {
     const pooX = this.random.integer(8, this.level.engine.drawWidth - 8);
-    const poo = new Poo({ pos: ex.vec(pooX, -8), fallVel: 100 });
+    const poo = new Poo(this.level, { pos: ex.vec(pooX, -8), fallVel: 100 });
     this.level.add(poo);
   }
 
